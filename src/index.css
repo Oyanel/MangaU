@@ -1,0 +1,180 @@
+body {
+    font-family: Roboto !important;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h2 {
+    font-size: 21px;
+}
+
+p {
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.error {
+    color: red !important;
+}
+
+/* FONT */
+.fas {
+    font-size: 30px;
+    opacity: .9;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.fas:hover {
+    cursor: pointer;
+    color: white;
+}
+
+/* BUTTON */
+
+.btn.btn-primary {
+    padding: 10px 20px;
+    background-color: #f0ad4e;
+    border: none;
+    padding: 15px;
+}
+
+.btn:disabled {
+    background-color: #f0ad4e;
+}
+
+.btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus, .btn.btn-primary:disabled {
+    opacity: .8;
+    background-color: #f0ad4e;
+    border: none;
+}
+
+/* APPLICATION */
+.background {
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: url('assests/img/sign-in.jpg') no-repeat center center fixed;
+    overflow: hidden;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* NAVIGATION */
+nav {
+    position: fixed;
+    background-color: transparent;
+    z-index: 2;
+}
+
+nav .nav-item {
+    top: 20px;
+    position: absolute;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.77);
+}
+
+nav .nav-item:first-child {
+    left: 20px;
+}
+
+nav .nav-item:last-child {
+    right: 20px;
+}
+
+nav a {
+    color: white;
+}
+
+nav a:hover {
+    opacity: 1;
+}
+
+nav a:hover, nav a:focus, nav a:active {
+    color: white;
+}
+
+/* SIGN IN */
+
+.login-form {
+    padding: 80px 20px;
+    top: 50vh;
+    transform: translateY(-60%);
+    position: absolute;
+    background-image: linear-gradient(#f9f9f9, rgba(249, 249, 249, 0.8));
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+    margin: 0 auto 0 auto;
+}
+
+.login-form .error {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.login-form h2 {
+    font-size: 21px;
+    text-align: center;
+}
+
+.login-form p {
+    margin-bottom: 40px;
+    font-size: 14px;
+    text-align: center;
+    color: gray;
+}
+
+.login-form input {
+    margin: 20px 0 20px 0;
+    height: 50px;
+    line-height: 50px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-form button {
+    width: 80%;
+    padding: 15px;
+    margin-left: 10%;
+}
+
+/* MANGA */
+.mangas{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.manga {
+    background-color: red;
+    margin:  20px;
+    padding: 15px;
+}
+
+.manga a {
+
+}
+
+.manga p {
+    font-size: 14px;
+}
