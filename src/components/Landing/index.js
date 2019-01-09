@@ -6,7 +6,7 @@ class Landing extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {favorites: []}
+        this.state = {trading: []}
     }
 
     render() {
@@ -17,10 +17,10 @@ class Landing extends React.Component {
                         <MangaApiContext.Consumer>
                             {
                                 context => (
-                                    context.favorites.slice(0, 10).map((manga) =>
-                                        <a href={manga.h} className="linkTo manga col-md-2">
-                                            <Manga Nchapter={1} priority={1} title={manga.t}
-                                                   themes={manga.c} key={manga.i}/>
+                                    context.trading.slice(0, 3).map((manga) =>
+                                        <a key={manga.id} href={manga.url} className="linkTo manga col-md-2">
+                                            <Manga Nchapter={1} priority={1} title={manga.title}
+                                                   img={manga.thumbnailUrl}/>
                                         </a>
                                     )
                                 )

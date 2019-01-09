@@ -14,10 +14,6 @@ import {withMangaApi} from "../MangaApi";
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Router>

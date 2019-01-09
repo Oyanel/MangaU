@@ -1,13 +1,10 @@
 import React from 'react'
-import axios from 'axios'
 import MangaApiContext from "../MangaApi/context";
 import {withFirebase} from "../Firebase";
 
 
 const config = {
-    username: process.env.REACT_APP_MANGAEVEN_USERNAME,
-    password: process.env.REACT_APP_MANGAEVEN_PASSWORD,
-    apiUrl: "https://www.mangaeden.com/"
+    apiUrl: process.env.REACT_APP_MANGA_APIURL
 };
 const withMangaApi = Component => {
     class MangaApi extends React.Component {
@@ -15,36 +12,15 @@ const withMangaApi = Component => {
         constructor(props) {
             super(props);
             this.config = config;
-            this.state = {mangas: [], favorites: []};
+            this.state = {mangas: [], favorites: [], trading: []};
         }
 
 
         componentWillMount() {
-            this.login();
-            this.getMangaList();
-            console.log('passe ici');
+            this.getTrading();
         }
 
-        /**
-         * Login request
-         */
-        login() {
-            var endPoint = `ajax/login/?username=${this.config.username}&password=${this.config.password}`;
-            var url = `${this.config.apiUrl}${endPoint}`;
-            axios.get(url)
-                .then(
-                    () => {
-                        this.setState({
-                            isLoggedIn: true
-                        });
-                    },
-                    (error) => {
-                        this.setState({
-                            error: error
-                        });
-                    }
-                )
-        }
+
 
         /**
          * feed state.mangas with mangaList
@@ -66,7 +42,7 @@ const withMangaApi = Component => {
                         });
                     }
                 )
-        }
+        };
 
         /**
          * getFavorites
@@ -74,7 +50,30 @@ const withMangaApi = Component => {
         getFavorites = () => {
             this.props.firebase.getFavoriteMangas();
             //@TODO: recupérer les favoris + faire les appels + renvoyé le resultat
-        }
+        };
+
+        /**
+         * getTrading
+         */
+        getTrading = () => {
+
+            var endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
+            var url = `${this.config.apiUrl}${endPoint}`;
+            fetch(url)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({
+                            trading: result.paginator.mangas
+                        });
+                    },
+                    (error) => {
+                        this.setState({
+                            error: error
+                        });
+                    }
+                )
+        };
 
 
         render() {
