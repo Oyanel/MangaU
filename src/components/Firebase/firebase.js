@@ -38,12 +38,12 @@ class Firebase {
         this.auth.currentUser.updatePassword(password);
 
     //binding fx
-    doInsertFavoriteManga = (mangaId) =>
-        this.db.ref(`user/${this.auth.uid}/mangas/favorites`).push().set({manga: mangaId});
+    doInsertFavoriteManga = (manga) =>
+        this.db.ref(`users/${this.auth.uid}/mangas/favorites`).push({manga: manga});
 
     getFavoriteMangas() {
         var user_id = this.auth ? this.auth.uid : this.auth.ref('users');
-        return this.db.ref(`user/${user_id}/mangas/favorites`);
+        return this.db.ref(`users/${user_id}/mangas/favorites`);
     }
 }
 

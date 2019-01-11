@@ -1,91 +1,66 @@
-import React from 'react'
-import MangaApiContext from "../MangaApi/context";
-import {withFirebase} from "../Firebase";
+// import {withFirebase} from "../Firebase";
 
 
 const config = {
     apiUrl: process.env.REACT_APP_MANGA_APIURL
 };
-const withMangaApi = Component => {
-    class MangaApi extends React.Component {
 
-        constructor(props) {
-            super(props);
-            this.config = config;
-            this.state = {mangas: [], favorites: [], trading: []};
-        }
+class MangaApi {
 
-
-        componentWillMount() {
-            this.getTrading();
-        }
-
-
-
-        /**
-         * feed state.mangas with mangaList
-         */
-        getMangaList = () => {
-            var endPoint = "api/list/0/";
-            var url = `${this.config.apiUrl}${endPoint}`;
-            fetch(url)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.setState({
-                            mangas: result.manga
-                        });
-                    },
-                    (error) => {
-                        this.setState({
-                            error: error
-                        });
-                    }
-                )
-        };
-
-        /**
-         * getFavorites
-         */
-        getFavorites = () => {
-            this.props.firebase.getFavoriteMangas();
-            //@TODO: recupérer les favoris + faire les appels + renvoyé le resultat
-        };
-
-        /**
-         * getTrading
-         */
-        getTrading = () => {
-
-            var endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
-            var url = `${this.config.apiUrl}${endPoint}`;
-            fetch(url)
-                .then(res => res.json())
-                .then(
-                    (result) => {
-                        this.setState({
-                            trading: result.paginator.mangas
-                        });
-                    },
-                    (error) => {
-                        this.setState({
-                            error: error
-                        });
-                    }
-                )
-        };
-
-
-        render() {
-            return (
-                <MangaApiContext.Provider value={this.state}>
-                    <Component {...this.props} />
-                </MangaApiContext.Provider>
-            );
-        }
+    constructor() {
+        this.config = config;
     }
 
-    return withFirebase(MangaApi);
-};
 
-export default withMangaApi;
+    /**
+     * getFavorites
+     */
+    getFavorites = () => {
+        //this.props.firebase.getFavoriteMangas();
+        //@TODO: recupérer les favoris + faire les appels + renvoyé le resultat
+    };
+
+    /**
+     * getTrading
+     */
+    getTrading = async () => {
+        var endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
+        var url = `${this.config.apiUrl}${endPoint}`;
+        return new Promise(resolve => {
+            fetch(url)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        resolve(result.paginator.mangas);
+                    },
+                    (error) => {
+                        error(error);
+                    }
+                );
+        });
+
+    };
+
+    /**
+     * search for a Manga
+     */
+    searchManga = async (name) => {
+
+        var endPoint = `/search/${process.env.REACT_APP_MANGA_PREFERED_SITE}/${name}`;
+        var url = `${this.config.apiUrl}${endPoint}`;
+        return new Promise(resolve => {
+            fetch(url)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        resolve(result.paginator.mangas);
+                    },
+                    (error) => {
+                        error(error);
+                    }
+                );
+        });
+    };
+}
+
+export default MangaApi;

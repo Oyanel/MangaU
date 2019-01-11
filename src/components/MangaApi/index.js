@@ -1,4 +1,6 @@
-import MangaApiContext from './context';
-import withMangaApi from './mangaApi';
+import MangaApiContext, {withMangaApi} from './context';
+import MangaApi from './mangaApi';
 
-export { MangaApiContext, withMangaApi };
+export default MangaApi;
+
+export {MangaApiContext, withMangaApi};
