@@ -1,15 +1,15 @@
-#Application front récupération de sorties de manga
+# Application front récupération de sorties de manga
 
-##Info
+## Info
 - Technology: React
 
-###Description 
+### Description 
 Récupère les données depuis une api puis me notifie quand c'est arrivé. 
 Marque les mangas déjà lus.
 
-##Fonctionnalité
+## Fonctionnalités
 
-##PMV
+### PMV
 
 - Créer un compte
 - Choisir les mangas que je veux regarder (recherche de manga) et les ajouter à ceux que je suis
@@ -17,7 +17,7 @@ Marque les mangas déjà lus.
 - Créer un lien vers le reader de préférence (fanfox ou mangarock, etc.) au click
  
 
-##Fonctionnalité ++
+### Fonctionnalité ++
 
 - Classer par priorité
 - Se souvenir de ceux déjà lus
@@ -25,22 +25,22 @@ Marque les mangas déjà lus.
 - A Voir pour rajouter les animes
 - manga scrapper (lecture de scan) - utilisation du module manga-parser 100%
 
-##Serveur node pour scrapper
+### Serveur node pour scrapper
 
 - module https://github.com/na-ji/node-manga-parser.git
 - creation d'un projet node -> creation d'une API avec ce module
 - mettre en facade tous les chemin qui exists sur le module
 
-##SETUP
+## SETUP
 
-###Dependencies
+### Dependencies
 
 - Install node
 - Install npm `node install npm`
 - Install gulp `npm install gulp@3.x`
 - Installer l'API mangaApi: '@TODO create git repo'
 
-###Installation
+### Installation
 - Clone the project: `git clone 'https://github.com/Oyanel/MangaU.git'`
 - run npm install to dl the dependencies: `npm install`
 - create a .env.local file from .env.local.default at `mangau/` and modify it (firebase credentials)
