@@ -1,6 +1,10 @@
 #Application front récupération de sorties de manga
 
-Description: Récupère les données depuis une api puis me notifie quand c'est arrivé. 
+##Info
+- Technology: React
+
+###Description 
+Récupère les données depuis une api puis me notifie quand c'est arrivé. 
 Marque les mangas déjà lus.
 
 ##Fonctionnalité
@@ -26,3 +30,21 @@ Marque les mangas déjà lus.
 - module https://github.com/na-ji/node-manga-parser.git
 - creation d'un projet node -> creation d'une API avec ce module
 - mettre en facade tous les chemin qui exists sur le module
+
+##SETUP
+
+###Dependencies
+
+- Install node
+- Install npm `node install npm`
+- Install gulp `npm install gulp@3.x`
+- Installer l'API mangaApi: '@TODO create git repo'
+
+###Installation
+- Clone the project: `git clone 'https://github.com/Oyanel/MangaU.git'`
+- run npm install to dl the dependencies: `npm install`
+- create a .env.local file from .env.local.default at `mangau/` and modify it (firebase credentials)
+- run gulp to compile the .less files: `gulp build` or `gulp prod` for prod
+
+
+

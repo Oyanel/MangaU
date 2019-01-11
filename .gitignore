@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# dist files
+public/css
+
 # testing
 /coverage
 
