@@ -37,9 +37,6 @@ const NavigationNonAuth = () => (
             <Link to={ROUTES.LANDING}>Landing</Link>
         </li>
         <li className={'nav-item'}>
-            <Link to={ROUTES.SEARCH}>Search</Link>
-        </li>
-        <li className={'nav-item'}>
             <Link to={ROUTES.SIGN_IN}><i className="fas fa-sign-in-alt"/></Link>
         </li>
     </ul>

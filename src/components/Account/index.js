@@ -1,9 +1,13 @@
 import React from 'react';
+import {withMangaApi} from "../MangaApi";
 
-const ACCOUNT = () => (
-    <div>
-        'hello here '
-    </div>
-);
+class Account extends React.Component {
 
-export default ACCOUNT;
+    render() {
+        return (
+            <div/>
+        )
+    }
+}
+
+export default withMangaApi(Account);

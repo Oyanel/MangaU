@@ -33,8 +33,9 @@ class Search extends React.Component {
     render() {
         return (
             <div className={"container-fluid"}>
-                <form className={"searchForm"}>
-                    <div className="form-group">
+                <form className={"searchForm col-md-6"}>
+                    <div className="form-group wrapper-search">
+                        <i className="fas fa-search"/>
                         <input
                             id={'search'}
                             className={'form-control'}
@@ -46,11 +47,12 @@ class Search extends React.Component {
                     </div>
                 </form>
                 <div className={"results"}>
+                    {this.state.result.length > 1 && <h2>Résultats de la recherche</h2>}
                     <ul className={"mangas row"}>
                         {this.state.result.slice(0, 10).map((manga) =>
                             <li key={manga.id} className={"col-md-2"}>
                                 <a href={manga.url} className="linkTo">
-                                    <Manga Nchapter={1} priority={1} title={manga.title}
+                                    <Manga Nchapter={1} priority={0} title={manga.title}
                                            img={manga.thumbnailUrl}/>
                                 </a>
                             </li>

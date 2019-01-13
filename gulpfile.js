@@ -17,8 +17,7 @@ gulp.task('build', function () {
 });
 
 gulp.task('watch-less', function () {
-    console.log('watching...');
-    gulp.watch('./src/less/**/*.less');
+    gulp.watch('./src/less/**/*.less', ['build']);
 });
 
 gulp.task('prod', function () {

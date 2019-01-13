@@ -1,8 +1,13 @@
 // import {withFirebase} from "../Firebase";
 
-
 const config = {
     apiUrl: process.env.REACT_APP_MANGA_APIURL
+};
+
+
+const postHeader = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
 };
 
 class MangaApi {
@@ -24,19 +29,22 @@ class MangaApi {
      * getTrading
      */
     getTrading = async () => {
-        var endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
-        var url = `${this.config.apiUrl}${endPoint}`;
+        let endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
+        let url = `${this.config.apiUrl}${endPoint}`;
+
         return new Promise(resolve => {
             fetch(url)
                 .then(res => res.json())
                 .then(
-                    (result) => {
-                        resolve(result.paginator.mangas);
+                    async (result) => {
+                        let mangas = await this.mangasDetail(result.paginator.mangas.slice(0, 12));
+                        resolve(mangas.mangas);
                     },
                     (error) => {
                         error(error);
                     }
                 );
+
         });
 
     };
@@ -46,8 +54,8 @@ class MangaApi {
      */
     searchManga = async (name) => {
 
-        var endPoint = `/search/${process.env.REACT_APP_MANGA_PREFERED_SITE}/${name}`;
-        var url = `${this.config.apiUrl}${endPoint}`;
+        let endPoint = `/search/${process.env.REACT_APP_MANGA_PREFERED_SITE}/${name}`;
+        let url = `${this.config.apiUrl}${endPoint}`;
         return new Promise(resolve => {
             fetch(url)
                 .then(res => res.json())
@@ -61,6 +69,33 @@ class MangaApi {
                 );
         });
     };
+
+    /**
+     * get mangas detail + chapter
+     */
+    mangasDetail = async (mangas) => {
+        let endPoint = `/mangas/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
+        let url = `${this.config.apiUrl}${endPoint}`;
+        return new Promise(resolve => {
+            fetch(url, {
+                method: 'POST',
+                headers: postHeader,
+                body: JSON.stringify({
+                    mangas: mangas,
+                })
+            }).then(res => res.json())
+                .then(
+                    (mangas) => {
+                        resolve(mangas);
+                    },
+                    (error) => {
+                        console.log('error');
+                        error(error);
+                    }
+                );
+        });
+    };
+
 }
 
 export default MangaApi;
