@@ -1,27 +1,59 @@
 import React from 'react';
 import Manga from "../Manga";
 import {withMangaApi} from "../MangaApi";
+import {compose} from 'recompose';
+import {withFirebase} from "../Firebase";
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {result: [], search: ''}
+        this.state = {result: [], search: '', calling: null}
     }
 
-    onChange = async event => {
-        this.setState({
-            search: event.target.value,
-            result: await this.searchManga(event.target.value)
-        });
-    };
+    componentWillUnmount() {
+        // cancel the call if the component unmount
+        !!this.state.calling && Promise.reject(this.state.calling);
+    }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextState.search.length >= 3;
+        // no update if the search do not return anything
+        return nextState.search.length >= 3 || nextState.result.length > 0;
     }
 
+    /**
+     * Return lunch the manga research.
+     *
+     * @param event
+     */
+    onChange = event => {
+        event.persist();
+        let call = this.searchManga(event.target.value).then(result => {
+            this.setState({
+                search: event.target.value,
+                result: result
+            });
+        });
+        this.setState({calling: call});
+    };
 
-    // Search from 3 chars
+
+    onClick = (manga) => {
+        this.props.mangaapi.mangasDetail([manga]).then(mangaDetail => {
+                manga = (mangaDetail.mangas)[0];
+                this.props.firebase
+                    .doInsertFavoriteManga(manga)
+                    .then(this.props.updateFavorites(manga))
+                    .catch(error => {
+                        this.setState({error});
+                    });
+                this.setState({result: [], search: ''})
+            }
+        )
+        ;
+    };
+
+// Search from 3 chars
     searchManga = async (eventValue) => {
         if (eventValue.length > 2) {
             return await this.props.mangaapi.searchManga(eventValue);
@@ -32,7 +64,7 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div className={"container-fluid"}>
+            <div id='search' className={"container-fluid"}>
                 <form className={"searchForm col-md-6"}>
                     <div className="form-group wrapper-search">
                         <i className="fas fa-search"/>
@@ -47,14 +79,15 @@ class Search extends React.Component {
                     </div>
                 </form>
                 <div className={"results"}>
-                    {this.state.result.length > 1 && <h2>Résultats de la recherche</h2>}
+                    {this.state.error && <div className={'error'}>{this.state.error}</div>}
+                    {this.state.result.length > 0 && <h2>Résultats de la recherche</h2>}
                     <ul className={"mangas row"}>
                         {this.state.result.slice(0, 10).map((manga) =>
                             <li key={manga.id} className={"col-md-2"}>
-                                <a href={manga.url} className="linkTo">
+                                <div onClick={() => this.onClick(manga)} className="linkTo">
                                     <Manga Nchapter={1} priority={0} title={manga.title}
                                            img={manga.thumbnailUrl}/>
-                                </a>
+                                </div>
                             </li>
                         )}
                     </ul>
@@ -64,4 +97,4 @@ class Search extends React.Component {
     }
 }
 
-export default withMangaApi(Search);
+export default compose(withMangaApi, withFirebase)(Search);

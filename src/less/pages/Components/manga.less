@@ -1,3 +1,5 @@
+@import "../../includes/dependencies";
+
 /* MANGA */
 
 .mangas {
@@ -8,8 +10,12 @@
   li {
     margin-bottom: 30px;
 
+    &.col-md-2 {
+      max-width: 11%;
+    }
+
     .manga {
-      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.8);
+      .box-shadow(@noir-80);
 
       &:hover {
         & > .info-manga {
@@ -20,7 +26,7 @@
         .fas.fa-bookmark span {
           transition: 0.3s;
           margin-top: 0;
-          text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+          text-shadow: 1px 1px 1px @noir-80;
           color: white;
         }
 
@@ -28,11 +34,11 @@
 
       img {
         width: 100%;
-        height: 350px;
+        height: 240px;
       }
 
       .fas.fa-bookmark {
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        text-shadow: 1px 1px 2px @noir-80;
         position: absolute;
         top: 0;
         z-index: 3;
@@ -58,18 +64,18 @@
       }
 
       .info-manga {
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        background: linear-gradient(transparent, @noir-90);
         transition: height 0.3s;
         position: absolute;
-        width: 90%;
+        width: 84.5%;
         bottom: 0;
         padding: 15px 15px 0 15px;
         color: white;
-        height: 22%;
+        height: 19%;
         overflow: hidden;
 
         &.priority1 {
-          border-bottom: 5px solid green;
+          border-bottom: 5px solid @turquoise;
         }
 
         &.priority2 {

@@ -1,5 +1,3 @@
-// import {withFirebase} from "../Firebase";
-
 const config = {
     apiUrl: process.env.REACT_APP_MANGA_APIURL
 };
@@ -16,67 +14,52 @@ class MangaApi {
         this.config = config;
     }
 
-
-    /**
-     * getFavorites
-     */
-    getFavorites = () => {
-        //this.props.firebase.getFavoriteMangas();
-        //@TODO: recupérer les favoris + faire les appels + renvoyé le resultat
-    };
-
     /**
      * getTrading
      */
-    getTrading = async () => {
-        let endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
+    getTrading = (Npage) => {
+        let endPoint = `/latestupdateslist/${process.env.REACT_APP_MANGA_PREFERED_SITE}/${Npage}`;
         let url = `${this.config.apiUrl}${endPoint}`;
 
-        return new Promise(resolve => {
+        return Promise.resolve(
             fetch(url)
                 .then(res => res.json())
                 .then(
-                    async (result) => {
-                        let mangas = await this.mangasDetail(result.paginator.mangas.slice(0, 12));
-                        resolve(mangas.mangas);
+                    (result) => {
+                        return result.paginator.mangas;
                     },
                     (error) => {
-                        error(error);
+                        return error;
                     }
-                );
-
-        });
-
+                ));
     };
 
     /**
      * search for a Manga
      */
-    searchManga = async (name) => {
-
+    searchManga = (name) => {
         let endPoint = `/search/${process.env.REACT_APP_MANGA_PREFERED_SITE}/${name}`;
         let url = `${this.config.apiUrl}${endPoint}`;
-        return new Promise(resolve => {
+        return Promise.resolve(
             fetch(url)
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        resolve(result.paginator.mangas);
+                        return result.paginator.mangas;
                     },
                     (error) => {
-                        error(error);
+                        return error;
                     }
-                );
-        });
+                ));
     };
 
     /**
      * get mangas detail + chapter
      */
-    mangasDetail = async (mangas) => {
+    mangasDetail = (mangas) => {
         let endPoint = `/mangas/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
         let url = `${this.config.apiUrl}${endPoint}`;
-        return new Promise(resolve => {
+        return Promise.resolve(
             fetch(url, {
                 method: 'POST',
                 headers: postHeader,
@@ -86,14 +69,9 @@ class MangaApi {
             }).then(res => res.json())
                 .then(
                     (mangas) => {
-                        resolve(mangas);
-                    },
-                    (error) => {
-                        console.log('error');
-                        error(error);
+                        return mangas;
                     }
-                );
-        });
+                ));
     };
 
 }

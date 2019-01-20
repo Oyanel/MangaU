@@ -1,3 +1,5 @@
+@import "../includes/dependencies";
+
 /* SIGN IN */
 
 .login-form {
@@ -5,9 +7,9 @@
   top: 50vh;
   transform: translateY(-60%);
   position: absolute;
-  background-image: linear-gradient(#f9f9f9, rgba(249, 249, 249, 0.8));
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(white, @blanc-80);
   margin: 0 auto 0 auto;
+  .box-shadow(@blanc-50);
 
   .error {
     margin-top: 20px;
@@ -27,12 +29,10 @@
   }
 
   input {
-    margin: 20px 0 20px 0;
     height: 50px;
     line-height: 50px;
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
   }
 
   button {

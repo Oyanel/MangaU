@@ -1,15 +1,49 @@
+@import "dependencies";
+
 /* BUTTON */
 
 .btn {
   &.btn-primary {
-    background-color: #f0ad4e;
+    background-color: @orange;
     border: none;
     padding: 15px;
 
     &:hover, &:active, &:focus, &:disabled {
       border: none;
       opacity: .8;
-      background-color: #f0ad4e;
+      background-color: @orange;
     }
   }
+}
+
+.dropdown-item {
+  color: @gris-fonce;
+  text-align: right;
+
+  &:active, &.active {
+    background-color: #f8f9fa !important;
+    color: @gris-fonce !important;
+
+    a {
+      color: @gris-fonce;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  a {
+    color: @gris-fonce;
+  }
+}
+
+.form-control {
+  &:focus {
+    border-color: @turquoise !important;
+  }
+}
+
+.right {
+  right: 0;
 }

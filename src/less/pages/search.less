@@ -1,3 +1,5 @@
+@import "../includes/dependencies";
+
 /* SEARCH */
 
 .searchForm {
@@ -9,23 +11,19 @@
 
     .fas.fa-search {
       margin-top: 5px;
-      margin-right: 10px;
-      color: white;
+      margin-right: -45px;
+      color: @orange;
       text-shadow: 1px 1px 1px grey;
       transition: margin-right 0.3s;
-
-      &:hover + #search {
-        display: none;
-        transition: 0.3s;
-      }
     }
 
     #search {
-      border-radius: 18px;
+      border-radius: 20px;
+      padding: 20px 0 20px 50px;
       background-color: white;
 
       &:focus {
-        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.8);
+        .box-shadow(@noir-50);
       }
     }
   }
@@ -37,11 +35,17 @@
   padding: 0 50px 0 50px;
 
   & > h2 {
-    border-bottom: 1px solid #f5f5f5cc;
-    color: #f5f5f5cc;
+    color: @noir-80;
     font-weight: 600;
     font-size: 37px;
     margin-bottom: 30px;
+
+    &:before {
+      content: '';
+      background-color: #f87f17;
+      padding-right: 6px;
+      margin-right: 5px;
+    }
   }
 
 }

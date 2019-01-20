@@ -1,6 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'recompose';
+import {withAuthorization} from '../Session';
 
 import {withFirebase} from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -91,9 +92,11 @@ class SignInFormBase extends React.Component {
     }
 }
 
+const condition = authUser => !authUser;
 const SignInForm = compose(
     withRouter,
     withFirebase,
+    withAuthorization(condition)
 )(SignInFormBase);
 
 export default SignInPage;

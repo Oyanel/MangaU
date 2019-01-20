@@ -1,13 +1,21 @@
 import React from 'react';
-import {withMangaApi} from "../MangaApi";
+import { AuthUserContext, withAuthorization } from '../Session';
 
 class Account extends React.Component {
 
     render() {
         return (
-            <div/>
+            <AuthUserContext.Consumer>
+                {authUser => (
+                    <div>
+                        <h1>Account: {authUser.email}</h1>
+                    </div>
+                )}
+            </AuthUserContext.Consumer>
         )
     }
 }
 
-export default withMangaApi(Account);
+
+const condition = authUser => !!authUser;
+export default withAuthorization(condition)(Account);

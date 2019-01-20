@@ -6,8 +6,11 @@ import * as ROUTES from '../../constants/routes';
 import {AuthUserContext} from '../Session';
 
 const Navigation = () => (
-    <nav className={'navbar navbar-expand-lg .navbar-fixed-left navbar-light'}>
-        <div className={'collapse navbar-collapse'}>
+    <nav className={'navbar navbar-expand-lg'}>
+        <div className={'collapse navbar-collapse justify-content-end'}>
+            <Link to={ROUTES.LANDING}>
+                <div className={'landing'}/>
+            </Link>
             <AuthUserContext.Consumer>
                 {authUser =>
                     authUser ? <NavigationAuth/> : <NavigationNonAuth/>
@@ -18,28 +21,24 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-    <ul className='navbar-nav mr-auto'>
-        <li className={'nav-item'}>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li className={'nav-item'}>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        <li className={'nav-item'}>
+    <div className="btn-group justify-content-end">
+        <button className="account btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">me
+        </button>
+        <div className="dropdown-menu dropdown-menu-right menu-account">
             <SignOutButton/>
-        </li>
-    </ul>
+            <button className="dropdown-item" type="button">
+                <Link to={ROUTES.ACCOUNT}>Mon compte</Link>
+            </button>
+
+        </div>
+    </div>
 );
 
 const NavigationNonAuth = () => (
-    <ul className='navbar-nav mr-auto'>
-        <li className={'nav-item'}>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li className={'nav-item'}>
-            <Link to={ROUTES.SIGN_IN}><i className="fas fa-sign-in-alt"/></Link>
-        </li>
-    </ul>
+    <div className={'btn-signin'}>
+        <Link to={ROUTES.SIGN_IN}><i className="fas fa-sign-in-alt"/></Link>
+    </div>
 );
 
 export default Navigation;

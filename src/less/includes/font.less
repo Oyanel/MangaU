@@ -1,12 +1,18 @@
+@import "dependencies";
+
 /* FONT */
 
 .fas {
   font-size: 30px;
   opacity: .9;
-  color: rgba(255, 255, 255, 0.8);
+  color: @gris-fonce;
 
   &.fas:hover {
     cursor: pointer;
-    color: white;
+    opacity: .8;
+  }
+
+  &.fa-sign-in-alt{
+    color: @gris-fonce;
   }
 }

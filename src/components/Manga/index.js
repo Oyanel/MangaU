@@ -6,7 +6,6 @@ const Manga = ({id, title, priority, Nchapter, img}) => (
         {priority > 0 && <i className="fas fa-bookmark"><span>{Nchapter}</span></i>}
         <div className={"info-manga priority" + priority}>
             <h2 className="title">{title}</h2>
-            <p>Themes</p>
         </div>
     </div>
 );

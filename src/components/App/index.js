@@ -6,7 +6,6 @@ import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import AccountPage from '../Account';
-import SearchPage from '../Search';
 
 import * as ROUTES from '../../constants/routes';
 import {withAuthentication} from '../Session';
@@ -22,7 +21,6 @@ class App extends React.Component {
                     <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
                     <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
                     <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
-                    <Route path={ROUTES.SEARCH} component={SearchPage}/>
                 </div>
             </Router>
         );

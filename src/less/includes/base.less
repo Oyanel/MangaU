@@ -1,62 +1,90 @@
+@import "dependencies";
+
 /* BASE */
 
-body {
-  font-family: Roboto, sans-serif !important;
+html, body {
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-  }
+  body {
+    font-family: Roboto, sans-serif !important;
+    height: 100%;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  h2 {
-    font-size: 21px;
-    text-transform: uppercase;
-  }
-
-  p {
-    font-size: 18px;
-  }
-
-  a {
-    text-decoration: none !important;
-
-    &:hover {
-      text-decoration: none !important;
+    code {
+      font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
     }
-  }
 
-  li {
-    list-style: none;
-  }
+    h2 {
+      font-size: 21px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a {
+      text-decoration: none !important;
+
+      &:hover {
+        text-decoration: none !important;
+      }
+    }
+
+    li {
+      list-style: none;
+    }
 
 
-  .error {
-    color: red !important;
-  }
+    .error {
+      color: red !important;
+    }
 
-  /* APPLICATION */
+    .linkTo:hover {
+    cursor: pointer;
+    }
 
-  .background {
-    height: 100vh;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    background: url('../img/sign-in.jpg') no-repeat center center fixed;
-    overflow: hidden;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+    /* APPLICATION */
 
-  .application {
-    background: url('../img/wallpaper-2.jpg') no-repeat center fixed;
-    background-size: cover;
+    .background {
+      height: 100vh;
+      width: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      background: url('../img/sign-in.jpg') no-repeat center center fixed;
+      overflow: hidden;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    .application {
+      background: url('../img/wallpaper-1.jpg') no-repeat top left fixed;
+      background-size: cover;
+      min-height: 100vh;
+      margin: 0 0 -16px 0;
+    }
+
+    .background-waiting {
+      position: relative;
+      margin-top: 30px;
+
+      .waiting {
+        top: 30vh;
+        position: absolute;
+        transform: translateY(-50%);
+        width: 100%;
+        background: url('../img/loading.gif') no-repeat center;
+        height: 130px;
+      }
+    }
   }
 }
 
