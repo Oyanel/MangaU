@@ -1,6 +1,7 @@
 import React from 'react';
 import {withMangaApi} from "../MangaApi";
 import Manga from "../Manga";
+import Slider from "react-slick";
 
 class Trading extends React.Component {
 
@@ -23,6 +24,10 @@ class Trading extends React.Component {
     }
 
     render() {
+        const settings = {
+            slidesToShow: 5,
+            slidesToScroll: 5
+        };
         return (
             <div>
                 {this.state.trading.length === 0
@@ -31,18 +36,20 @@ class Trading extends React.Component {
                 </div>
                 }
                 <div className={"results"}>
-                    <h2>En ce moment</h2>
-                    <ul className={"mangas row"}>
-                        {this.state.trading.length > 0 && this.state.trading.map((manga) =>
-                            <li key={manga.id} className={"col-md-2 col-sm-12"}>
-                                <div onClick={() => this.onClick(manga)} className="linkTo">
-                                    <Manga Nchapter={manga.lastChapter && manga.lastChapter.number} priority={0}
-                                           title={manga.title}
-                                           img={manga.thumbnailUrl}/>
+                    <h2 className={'col-md-12'}>En ce moment</h2>
+                    <div className={"mangas col-md-12"}>
+                        <Slider {...settings}>
+                            {this.state.trading.length > 0 && this.state.trading.map((manga) =>
+                                <div key={manga.id} className={"col-md-12"}>
+                                    <div onClick={() => this.onClick(manga)} className="linkTo">
+                                        <Manga Nchapter={manga.lastChapter && manga.lastChapter.number} priority={0}
+                                               title={manga.title}
+                                               img={manga.thumbnailUrl}/>
+                                    </div>
                                 </div>
-                            </li>
-                        )}
-                    </ul>
+                            )}
+                        </Slider>
+                    </div>
                 </div>
             </div>
         )
