@@ -34,6 +34,27 @@ class MangaApi {
                 ));
     };
 
+    getPageList(manga) {
+        let endPoint = `/getImageList/${process.env.REACT_APP_MANGA_PREFERED_SITE}`;
+        let url = `${this.config.apiUrl}${endPoint}`;
+        return new Promise(resolve =>
+            fetch(url, {
+                method: 'POST',
+                headers: postHeader,
+                body: JSON.stringify({
+                    manga: manga,
+                })
+            }).then(res => {
+                let listImage;
+                res.json()
+                    .then((images) => {
+                        listImage = images;
+                        console.log(listImage);
+                        resolve(listImage);
+                    });
+            }));
+    }
+
     /**
      * search for a Manga
      */

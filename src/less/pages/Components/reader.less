@@ -1,0 +1,29 @@
+@import "../../includes/dependencies";
+
+/* READER */
+
+.reader-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: @noir-70;
+  overflow-y: auto;
+  z-index: 3;
+
+  .wrapper {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
+
+    img {
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
+      border: 20px solid white;
+    }
+
+  }
+}

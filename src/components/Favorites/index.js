@@ -1,7 +1,9 @@
 import React from 'react';
 import Manga from "../Manga";
+import {compose} from 'recompose';
 
 import {withFirebase} from "../Firebase";
+import {withMangaApi} from "../MangaApi";
 
 class Favorites extends React.Component {
 
@@ -16,6 +18,11 @@ class Favorites extends React.Component {
         });
     }
 
+    async onClick(manga) {
+        let images = await this.props.mangaapi.getPageList(manga);
+        this.props.setReader(images);
+    }
+
     render() {
         return (
             <div className={"results"}>
@@ -23,8 +30,8 @@ class Favorites extends React.Component {
                 {this.state.favorites.length === 0 && <div>Pas de favoris pour le moment</div>}
                 <ul className={"mangas row"}>
                     {this.state.favorites.length > 0 && this.state.favorites.map((manga) =>
-                        <li key={manga.id} className={"col-md-2"}>
-                            <div className="linkTo">
+                        <li key={manga.id} className={"col-md-2 col-sm-12"}>
+                            <div onClick={() => this.onClick(manga)} className="linkTo">
                                 <Manga Nchapter={manga.lastChapter && manga.lastChapter.number} priority={1}
                                        title={manga.title}
                                        img={manga.thumbnailUrl}/>
@@ -33,7 +40,7 @@ class Favorites extends React.Component {
                     )}
                     {this.props.newFavorites.length > 0 && this.props.newFavorites.map((manga) =>
                         <li key={manga.id} className={"col-md-2"}>
-                            <div className="linkTo">
+                            <div onClick={() => this.onClick(manga)} className="linkTo">
                                 <Manga Nchapter={manga.lastChapter && manga.lastChapter.number} priority={1}
                                        title={manga.title}
                                        img={manga.thumbnailUrl}/>
@@ -46,4 +53,4 @@ class Favorites extends React.Component {
     }
 }
 
-export default withFirebase(Favorites);
+export default compose(withMangaApi, withFirebase)(Favorites);

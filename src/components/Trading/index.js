@@ -17,6 +17,11 @@ class Trading extends React.Component {
             );
     }
 
+    onClick(manga) {
+        let images = this.props.mangaapi.getPageList(manga);
+        this.props.setReader(images);
+    }
+
     render() {
         return (
             <div>
@@ -29,12 +34,12 @@ class Trading extends React.Component {
                     <h2>En ce moment</h2>
                     <ul className={"mangas row"}>
                         {this.state.trading.length > 0 && this.state.trading.map((manga) =>
-                            <li key={manga.id} className={"col-md-2"}>
-                                <a href={manga.url} className="linkTo">
+                            <li key={manga.id} className={"col-md-2 col-sm-12"}>
+                                <div onClick={() => this.onClick(manga)} className="linkTo">
                                     <Manga Nchapter={manga.lastChapter && manga.lastChapter.number} priority={0}
                                            title={manga.title}
                                            img={manga.thumbnailUrl}/>
-                                </a>
+                                </div>
                             </li>
                         )}
                     </ul>
